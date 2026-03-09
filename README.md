@@ -37,7 +37,7 @@ Trigger with phrases like: "setup docs", "convert to docs", "upgrade docs", "cre
 ## Supersedes
 
 This skill consolidates and extends:
-- scaffold-docs (cursor-skills)
-- scaffold-exploration (cursor-skills)
+- [scaffold-docs](https://github.com/paulrenenichols/cursor-skills/tree/main/scaffold-docs)
+- [scaffold-exploration](https://github.com/paulrenenichols/cursor-skills/tree/main/scaffold-exploration)
 
-For new adopters, docs-driven-dev is the recommended unified skill.
+See [cursor-skills](https://github.com/paulrenenichols/cursor-skills) for the original skills. For new adopters, docs-driven-dev is the recommended unified skill.
