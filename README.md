@@ -2,7 +2,7 @@
 
 A Cursor skill for docs-driven development: planning, milestones, explorations, and documentation workflows.
 
-**Current version:** 1.2.0
+**Current version:** 1.3.0
 
 ## What it does
 
