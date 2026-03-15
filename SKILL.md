@@ -1,6 +1,6 @@
 ---
 name: docs-driven-dev
-version: "1.3.0"
+version: "1.5.0"
 description: Docs-driven development. Use when setting up docs, converting projects, upgrading, creating explorations, or managing milestones. Accepts both "docs" and "_docs". Ask "help" or "what can you do?" for capabilities.
 ---
 
@@ -37,7 +37,7 @@ When the user asks "what can you do?", "help", "what capabilities", or similar, 
 - **Update exploration** — Update an existing exploration (add feature sets, align to standards)
 - **Create milestone from exploration** — Turn an exploration into a milestone in `milestones/future/` and move the exploration to `explorations/completed/`
 - **Make milestone active** — Move a future milestone to `active/` and verify phases/phase-plans
-- **Mark milestone completed** — Move an active milestone to `completed/` and add number prefix (do when the last phase is merged; skill prompts for this)
+- **Mark milestone completed** — Move an active milestone to `completed/` and add number prefix to the milestone folder, the corresponding `progress/` folder, and the exploration in `planning/explorations/completed/` (do when the last phase is merged; skill prompts for this)
 
 ---
 
@@ -116,15 +116,16 @@ Do NOT automatically continue to the next phase. The user must explicitly reques
    - Move contents of `progress/future/<milestone>/` to `progress/<milestone>/`
    - Keep `progress/miscellaneous/` as-is
    - Delete empty `completed/`, `active/`, `future/` folders
-5. Align milestones structure: ensure `milestones/` has `completed/`, `active/`, `future/`
-6. Ensure `milestones/README.md` has Completed / Active / Future sections
-7. Ensure setup files match skill's canonical copies
-8. Ensure `_docs/planning/explorations/completed/` exists
-9. Update exploration READMEs to current standards
-10. Preserve prior attribution in parentheses where useful
-11. **Embed skill:** Copy current skill to `.cursor/skills/docs-driven-dev/` (overwrite)
-12. **Project README:** Add or update the "Docs-driven development" section using full content from `templates/readme-docs-section.md` (including **How to use the skill**)
-13. Commit (if git)
+5. **Align progress folder prefixes** (v1.4.0): For each completed milestone in `milestones/completed/` (e.g. `04-developer-experience`), if `progress/` has a folder with the same base name but no number prefix (e.g. `progress/developer-experience/`), rename it to the prefixed form (e.g. `progress/04-developer-experience/`). Skip `progress/miscellaneous/`. This fixes progress folders that were completed before the skill added progress prefixing.
+6. Align milestones structure: ensure `milestones/` has `completed/`, `active/`, `future/`
+7. Ensure `milestones/README.md` has Completed / Active / Future sections
+8. Ensure setup files match skill's canonical copies
+9. Ensure `_docs/planning/explorations/completed/` exists
+10. Update exploration READMEs to current standards
+11. Preserve prior attribution in parentheses where useful
+12. **Embed skill:** Copy current skill to `.cursor/skills/docs-driven-dev/` (overwrite)
+13. **Project README:** Add or update the "Docs-driven development" section using full content from `templates/readme-docs-section.md` (including **How to use the skill**)
+14. Commit (if git)
 
 ---
 
@@ -185,8 +186,10 @@ Do this when the milestone's **last phase** is finished (PR merged). It is part 
 
 1. Move folder from `milestones/active/<name>/` to `milestones/completed/`
 2. Add number prefix = max(completed numbers) + 1 (e.g. `04-<name>`)
-3. Update `milestones/README.md` index
-4. Branch: `milestone/complete/<name>`
+3. **Rename progress folder:** If `progress/<name>/` exists, rename it to `progress/<NN>-<name>/` using the same number prefix (e.g. `progress/developer-experience/` → `progress/04-developer-experience/`). This keeps progress folder names aligned with completed milestone numbering.
+4. **Rename exploration folder:** If `planning/explorations/completed/<name>/` exists, rename it to `planning/explorations/completed/<NN>-<name>/` using the same number prefix. Update any links in _docs that point to the exploration (e.g. progress READMEs, milestone README, exploration README relative links) to use the new path.
+5. Update `milestones/README.md` index
+6. Branch: `milestone/complete/<name>`
 
 ---
 
